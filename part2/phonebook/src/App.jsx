@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import PersonsForm from './components/PersonsForm'
+import Notification from './components/Notification'
 import Filter from './components/Filter'
 import axios from 'axios'
+import './index.css'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,6 +13,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [notification, setNotification] = useState(null)
   const filteredPersons =  (persons.filter((person) => person.name.toLowerCase().includes(newFilter.toLowerCase())))
 
   useEffect(() => {
@@ -29,7 +32,8 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} setNewFilter={setNewFilter}/>
       <h2>Add a new</h2>
-      <PersonsForm newName={newName} newNumber={newNumber}  setNewName={setNewName} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons}/>
+      <Notification message={notification} />
+      <PersonsForm newName={newName} newNumber={newNumber}  setNewName={setNewName} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} setNotification={setNotification}/>
       <h2>Numbers</h2>
       <Persons persons={filteredPersons} setPersons={setPersons} > </Persons>
     </div>

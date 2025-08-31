@@ -1,7 +1,7 @@
 import axios from 'axios'
 import personService from '../services/person'
 
-const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPersons}) => {
+const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPersons,setNotification}) => {
   const addNewPerson = (event) => {
     event.preventDefault() 
     //prevent same name from being added with some
@@ -27,6 +27,10 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
       setPersons(persons.concat(addedPerson))
       setNewName('')
       setNewNumber('')
+      setNotification(`Added ${addedPerson.name} to phonebook`)  
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
     }
     )
   }
