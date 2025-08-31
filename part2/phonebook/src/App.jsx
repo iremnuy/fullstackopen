@@ -20,8 +20,8 @@ const App = () => {
     .then(response => {
     console.log('Promise fulfilled')
     setPersons(response.data)
-    })
-  })
+    }) 
+  }, [] ) //run only once after the first render, then wait for another rerender from some other cause
     
 
   return (
@@ -31,7 +31,7 @@ const App = () => {
       <h2>Add a new</h2>
       <PersonsForm newName={newName} newNumber={newNumber}  setNewName={setNewName} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons}/>
       <h2>Numbers</h2>
-      <Persons persons={filteredPersons}> </Persons>
+      <Persons persons={filteredPersons} setPersons={setPersons} > </Persons>
     </div>
   )
 }

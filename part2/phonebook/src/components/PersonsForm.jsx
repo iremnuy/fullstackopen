@@ -1,3 +1,5 @@
+import axios from 'axios'
+import personService from '../services/person'
 
 const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPersons}) => {
   const addNewPerson = (event) => {
@@ -7,9 +9,14 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
       alert(`${newName} is already added to phonebook`)
       return
     } 
-    setPersons(persons.concat({ name : newName , number : newNumber }))
-    setNewName('')
-    setNewNumber('')
+    
+    //call the backend to add the new person
+    personService.addPerson(newName, newNumber).then(addedPerson => {
+      setPersons(persons.concat(addedPerson))
+      setNewName('')
+      setNewNumber('')
+    }
+    )
   }
 
     return (
@@ -24,5 +31,6 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
       </form>
     )
   }
+
 
 export default PersonsForm;
