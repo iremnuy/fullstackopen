@@ -6,7 +6,19 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
     event.preventDefault() 
     //prevent same name from being added with some
     if (persons.some(person => person.name === newName)) {
-      alert(`${newName} is already added to phonebook`)
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
+        const personToUpdate = persons.find(person => person.name === newName)
+        const updatedPerson = {...personToUpdate, number: newNumber}
+        personService.updatePerson(personToUpdate.id, updatedPerson).then(returnedPerson => {
+          setPersons(persons.map(person => person.id !== personToUpdate.id ? person : returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        }).catch(error => {
+          alert(`the person '${newName}' was already deleted from server`)
+          setPersons(persons.filter(person => person.id !== personToUpdate.id))
+        })
+
+      }
       return
     } 
     

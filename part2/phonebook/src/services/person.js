@@ -17,7 +17,22 @@ const addPerson = (newName, newNumber) => {
 
 }
 
-export default { addPerson }
+const updatePerson = (id, updatedPerson) => {
+ return (axios.put(`${baseUrl}/${id}`, updatedPerson)
+      .then(response => {
+        console.log('Response from server:', response)
+        return response.data
+      }).then(data => {
+        console.log('Data received:', data)
+        return data
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+      }))   
+
+}
+
+export default { addPerson, updatePerson }
 
 
 
