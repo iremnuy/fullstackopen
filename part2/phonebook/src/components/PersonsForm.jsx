@@ -9,15 +9,11 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
         const personToUpdate = persons.find(person => person.name === newName)
         const updatedPerson = {...personToUpdate, number: newNumber}
-        personService.updatePerson(personToUpdate.id, updatedPerson).then(returnedPerson => {
+        personService.updatePerson(personToUpdate.id, updatedPerson, setNotification).then(returnedPerson => {
           setPersons(persons.map(person => person.id !== personToUpdate.id ? person : returnedPerson))
           setNewName('')
           setNewNumber('')
-        }).catch(error => {
-          alert(`the person '${newName}' was already deleted from server`)
-          setPersons(persons.filter(person => person.id !== personToUpdate.id))
         })
-
       }
       return
     } 
@@ -27,9 +23,9 @@ const PersonsForm = ({newName,newNumber,setNewName,setNewNumber,persons,setPerso
       setPersons(persons.concat(addedPerson))
       setNewName('')
       setNewNumber('')
-      setNotification(`Added ${addedPerson.name} to phonebook`)  
+      setNotification({message:`Added ${addedPerson.name} to phonebook`,type:'success'})  
           setTimeout(() => {
-            setNotification(null)
+            setNotification({message:null,type:null})
           }, 5000)
     }
     )

@@ -17,7 +17,7 @@ const addPerson = (newName, newNumber) => {
 
 }
 
-const updatePerson = (id, updatedPerson) => {
+const updatePerson = (id, updatedPerson, setNotification) => {
  return (axios.put(`${baseUrl}/${id}`, updatedPerson)
       .then(response => {
         console.log('Response from server:', response)
@@ -27,7 +27,12 @@ const updatePerson = (id, updatedPerson) => {
         return data
       })
       .catch(error => {
-        console.error('There was an error!', error);
+        //notification 
+        setNotification({message:`Information of ${updatedPerson.name} has already been removed from server`, type: 'error'})
+        setTimeout(() => {
+          setNotification({message:null,type:null})
+        }, 5000)
+        console.log('There was an error!', error)
       }))   
 
 }

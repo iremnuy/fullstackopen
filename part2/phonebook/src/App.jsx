@@ -13,8 +13,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  const [notification, setNotification] = useState(null)
-  const filteredPersons =  (persons.filter((person) => person.name.toLowerCase().includes(newFilter.toLowerCase())))
+  const [notification, setNotification] = useState({message: null, type: null})
+  const filteredPersons =  (persons.filter((person) => person?.name?.toLowerCase().includes(newFilter.toLowerCase())))
 
   useEffect(() => {
     console.log('Effect')
@@ -32,7 +32,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter newFilter={newFilter} setNewFilter={setNewFilter}/>
       <h2>Add a new</h2>
-      <Notification message={notification} />
+      <Notification notification={notification} />
       <PersonsForm newName={newName} newNumber={newNumber}  setNewName={setNewName} setNewNumber={setNewNumber} persons={persons} setPersons={setPersons} setNotification={setNotification}/>
       <h2>Numbers</h2>
       <Persons persons={filteredPersons} setPersons={setPersons} > </Persons>
