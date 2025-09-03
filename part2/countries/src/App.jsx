@@ -14,6 +14,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
+          console.log("data is" , data)
           setCountries(data)
         } else {
           setCountries([])
@@ -44,7 +45,8 @@ function App() {
           <CountryDetail country={filteredCountries[0]} />
         ) : (
           filteredCountries.map((country) => (
-            <CountrySummary key={country.cca3} country={country} />
+            <CountrySummary key={country.cca3} country={country} setNewFilter={setNewFilter} />
+            
           ))
         )}
       </div>
