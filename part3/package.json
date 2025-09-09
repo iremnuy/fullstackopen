@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "name": "phonebook",
+  "version": "1.0.0",
+  "description": "phonebook backend for part3",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "author": "İrem Nur Yıldırım",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
